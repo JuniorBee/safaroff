@@ -1,0 +1,30 @@
+<div class="row"></div>
+{% for post in posts %}
+    <div class="span3">
+        <div class="home-post">
+            <div class="post-image">
+                <img class="max-img" src="{{ post.cover.url }}" alt=""/>
+            </div>
+            <div class="post-meta">
+                <i class="icon-file icon-2x"></i>
+                <span class="date">{{ post.changed_at|date:"M d Y" }}</span>
+                <span class="tags">
+            {% for tag in post.tags.all %}
+                {% if not forloop.last %}
+                    <a href="#">{{ tag.name|title }}</a>,
+                {% else %}
+                    <a href="#">{{ tag.name|title }}</a>
+                {% endif %}
+            {% endfor %}
+        </span>
+            </div>
+            <div class="entry-content">
+                <h5><strong><a href="#">{{ post.title }}</a></strong></h5>
+                <p>
+                    {{ post.text|truncatechars:50 }} &hellip;
+                </p>
+                <a href="#" class="more">Read more</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
